@@ -1,14 +1,15 @@
 package snack_and_ladder;
 
-public class UC7_No_of_dice_to_win extends UC3_player_option {
+public class UC8_Two_player extends UC3_player_option {
 	static final int NOPLAY = 0, SNAKE = 1, LADDER = 2;
 	
 	public static void main(String[] args) {
-		int position = new UC1_getPosition().position;
-		int cnt = 0, diceroll;
+		int position1 = new UC1_getPosition().position;
+		int position2 = new UC1_getPosition().position;
+		int cnt = 0, position = 0, diceroll;
+		boolean player1 = true, player2 = false;
 		
-		while(position < 100) {
-			
+		while((position1 < 100) && (position2 < 100)) {
 			diceroll = getDiceRoll();
 			
 			switch(getOption()) {
@@ -20,19 +21,33 @@ public class UC7_No_of_dice_to_win extends UC3_player_option {
 					break;
 				case LADDER:
 					position += diceroll;
-					break;	
+					continue;
 			}
 			
-			if(position < 0) {
+			if( position > 0) {
+				if (player1) {
+					position1 += position;
+					position = 0;
+					player1 = false;
+					player2  = true;
+				}
+				else {
+					position2 += position;
+					position = 0;
+					player2  = false;
+					player1 = true;
+				}
+			}
+			
+			else {
 				position = 0;
-			}
-			else if(position > 100 ) {
-				position -= diceroll;
-			}
-			cnt++;
-			System.out.println("position of player = "+position);	
+			}	
 		}
-		System.out.println("Number of dice required to win = "+cnt);
-		
+	if(position1>position2) {
+		System.out.println("player1 is the winner");
+	}
+	else {
+		System.out.println("player2 is the winner");
+	}
 	}
 }
