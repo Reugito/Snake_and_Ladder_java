@@ -1,2 +1,1 @@
-# Snake_and_Ladder_java
-Snake and ladder simulator
+# Snake and ladder simulator
